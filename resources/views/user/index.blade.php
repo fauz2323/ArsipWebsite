@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="m-3">
                     <a href="{{ route('kode.create') }}" class="btn btn-primary">Tambah Data</a>
