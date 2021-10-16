@@ -16,6 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -35,7 +36,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
             </a>
 
             <!-- Divider -->
@@ -43,7 +44,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -63,34 +64,40 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data Arsip</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Data:</h6>
-                        <a class="collapse-item" href="{{ route('kode.index') }}">Daftar Kode Berkas</a>
-
-                        <a class="collapse-item" href="{{ route('murid.index') }}">Data Murid</a>
-                        <a class="collapse-item" href="{{ route('arsip.index') }}">Data Berkas</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Pengaturan</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Pengaturan:</h6>
-                        <a class="collapse-item" href="{{ route('user') }}">User</a>
-                        <a class="collapse-item" href="{{ route('profile') }}">Profile</a>
-                        <a class="collapse-item" href="{{ route('role') }}">Set Admin</a>
+                        <h6 class="collapse-header">Data:</h6>
+                        <a class="collapse-item" href="{{ route('kode.index') }}">Daftar Kode Arsip</a>
+                        <a class="collapse-item" href="{{ route('murid.index') }}">Arsip Murid</a>
+                        <a class="collapse-item" href="{{ route('guru.index') }}">Arsip Guru</a>
+                        <a class="collapse-item" href="{{ route('arsip.index') }}">Arsip Berkas</a>
                     </div>
                 </div>
             </li>
+
+
+            @if (Auth::user()->hasRole('admin'))
+
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Pengaturan</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Pengaturan:</h6>
+                            <a class="collapse-item" href="{{ route('user') }}">User</a>
+                            <a class="collapse-item" href="{{ route('profile') }}">Profile</a>
+                            <a class="collapse-item" href="{{ route('role') }}">Set Admin</a>
+                        </div>
+                    </div>
+                </li>
+            @endif
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -152,9 +159,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -177,8 +183,8 @@
 
                 <!-- Begin Page Content -->
 
-                    <!-- Page Heading -->
-                    @yield('content')
+                <!-- Page Heading -->
+                @yield('content')
 
                 <!-- /.container-fluid -->
 
@@ -220,18 +226,20 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
+                    <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">Logout</a>
 
-                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
 
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
@@ -250,6 +258,8 @@
     <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
     @stack('script')
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
 
 
 </body>

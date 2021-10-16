@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GuruModel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\ArsipPost;
-use App\Models\CodeArsip;
+use App\Models\Murid;
 use Illuminate\Database\Eloquent\Collection;
 
-class ArsipPostController extends Controller
+class GuruController extends Controller
 {
-    public function __cnstruct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -23,22 +23,17 @@ class ArsipPostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = ArsipPost::with('codeArsip')->get();
+            $data = GuruModel::orderBy('nama')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="/arsipDelete/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Delete</a> <a href="/arsip/' . $row->id . ' /edit" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Edit Arsip</a>';
+                    $btn = '<a href="/guruDelete/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Delete User</a> <a href="/guru/' . $row->id . ' /edit" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Edit</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
-        // $arsip = ArsipPost::with('codeArsip')->simplePaginate(3);
-        // $count = 1;
-
-        // return view('arsip.index' , ['arsip' => $arsip, 'jpg' => $jpg]);
-        return view('arsip.index');
+        return view('guru.index');
     }
 
     /**
@@ -48,8 +43,7 @@ class ArsipPostController extends Controller
      */
     public function create()
     {
-        $code = CodeArsip::all();
-        return view('arsip.create', compact('code'));
+        return view('guru.create');
     }
 
     /**
@@ -60,25 +54,23 @@ class ArsipPostController extends Controller
      */
     public function store(Request $request)
     {
-
-        $arsip = ArsipPost::create([
-            'code_id' => $request->code_id,
-            'nama_arsip' => $request->nama,
-            'keterangan_arsip' => $request->keterangan,
-            'jenis_data' => 'jpg',
+        $murid = GuruModel::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'NIK' => $request->nik,
         ]);
 
         foreach ($request->file('file') as $key) {
 
-            $path = Storage::disk('public')->putFile('filez', $key);
+            $path = Storage::disk('public')->putFile('filezMurid', $key);
             $files = [
-                'arsip_id' => $arsip->id,
+                'murid_id' => $murid->id,
                 'path' => $path,
             ];
-            $arsip->files()->create($files);
+            $murid->fileGuru()->create($files);
         }
 
-        return redirect()->route('arsip.index');
+        return redirect()->route('guru.index');
     }
 
     /**
@@ -89,8 +81,8 @@ class ArsipPostController extends Controller
      */
     public function show($id)
     {
-        $data = ArsipPost::findOrFail($id);
-        return view('arsip.show', compact('data'));
+        $data = GuruModel::findOrFail($id);
+        return view('guru.show', compact('data'));
     }
 
     /**
@@ -101,9 +93,8 @@ class ArsipPostController extends Controller
      */
     public function edit($id)
     {
-        $data = ArsipPost::findOrFail($id);
-        $code = CodeArsip::all();
-        return view('arsip.edit', compact('data', 'code'));
+        $data = GuruModel::findOrFail($id);
+        return view('guru.edit', compact('data'));
     }
 
     /**
@@ -115,30 +106,30 @@ class ArsipPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $arsip = ArsipPost::findOrFail($id);
+        $murid = GuruModel::findOrFail($id);
         if ($request->hasFile('file')) {
-            foreach ($arsip->files as $key) {
+            foreach ($murid->fileGuru as $key) {
 
                 Storage::delete('public/' . $key->path);
             }
-            $arsip->files()->delete();
+            $murid->fileGuru()->delete();
             foreach ($request->file('file') as $key) {
 
                 $path = Storage::disk('public')->putFile('filez', $key);
                 $files = [
-                    'arsip_id' => $arsip->id,
+                    'guru_id' => $murid->id,
                     'path' => $path,
                 ];
-                $arsip->files()->create($files);
+                $murid->fileGuru()->create($files);
             }
         }
         $data = [
-            'code_id' => $request->code_id,
-            'nama_arsip' => $request->nama,
-            'keterangan_arsip' => $request->keterangan,
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'NIK' => $request->nik,
         ];
-        $arsip->update($data);
-        return redirect()->route('arsip.index');
+        $murid->update($data);
+        return redirect()->route('guru.index');
     }
 
     /**
@@ -149,13 +140,11 @@ class ArsipPostController extends Controller
      */
     public function destroy($id)
     {
-        $delete = ArsipPost::findOrFail($id);
-        foreach ($delete->files as $key) {
-            $count = 1;
+        $delete = GuruModel::findOrFail($id);
+        foreach ($delete->fileGuru as $key) {
             Storage::delete('public/' . $key->path);
-            $count++;
         }
         $delete->delete();
-        return redirect()->route('arsip.index');
+        return redirect()->route('guru.index');
     }
 }

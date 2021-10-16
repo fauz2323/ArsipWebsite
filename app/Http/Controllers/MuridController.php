@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Murid;
@@ -18,13 +19,24 @@ class MuridController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $murid = Murid::orderBy('nama')->simplePaginate(3);
+
+        if ($request->ajax()) {
+            $data = Murid::orderBy('nama')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="/muridDelete/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Delete User</a> <a href="/murid/' . $row->id . ' /edit" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Edit</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
 
         // return view('arsip.index' , ['arsip' => $arsip, 'jpg' => $jpg]);
-        return view('murid.index', compact('murid'));
-
+        return view('murid.index');
     }
 
     /**
@@ -52,7 +64,7 @@ class MuridController extends Controller
             'nis' => $request->nis,
         ]);
 
-        foreach ( $request->file('file') as $key ) {
+        foreach ($request->file('file') as $key) {
 
             $path = Storage::disk('public')->putFile('filezMurid', $key);
             $files = [
@@ -75,7 +87,6 @@ class MuridController extends Controller
     {
         $data = Murid::findOrFail($id);
         return view('murid.show', compact('data'));
-
     }
 
     /**
@@ -103,8 +114,7 @@ class MuridController extends Controller
         if ($request->hasFile('file')) {
             foreach ($murid->filesMurid as $key) {
 
-                Storage::delete('public/'. $key->path);
-
+                Storage::delete('public/' . $key->path);
             }
             $murid->filesMurid()->delete();
             foreach ($request->file('file') as $key) {
@@ -135,8 +145,8 @@ class MuridController extends Controller
     public function destroy($id)
     {
         $delete = Murid::findOrFail($id);
-        foreach ($delete->filesMurid as $key ) {
-            Storage::delete('public/'.$key->path);
+        foreach ($delete->filesMurid as $key) {
+            Storage::delete('public/' . $key->path);
         }
         $delete->delete();
         return redirect()->route('murid.index');

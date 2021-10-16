@@ -8,16 +8,16 @@
             </div>
             <div class="card-body">
                 <div class="">
-                    <a href="{{ route('arsip.create') }}" class="btn btn-primary mb-3">Add data</a>
+                    <a href="{{ route('guru.create') }}" class="btn btn-primary mb-3">Add data</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="users-table" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th width="30px">number</th>
-                                <th>Nama Arsip</th>
-                                <th>Jenis Data</th>
-                                <th>Keterangan</th>
+                                <th>Nama Guru</th>
+                                <th>Nomor Induk</th>
+                                <th>Alamat</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -46,15 +46,15 @@
                         }
                     },
                     {
-                        data: 'nama_arsip',
-                        name: 'nama_arsip'
+                        data: 'nama',
+                        name: 'nama'
                     },
                     {
-                        data: 'jenis_data',
-                        name: 'jenis_data'
+                        data: 'NIK',
+                        name: 'NIK'
                     }, {
-                        data: 'keterangan_arsip',
-                        name: 'keterangan_arsip'
+                        data: 'alamat',
+                        name: 'alamat'
                     },
 
                     {
