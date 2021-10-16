@@ -18,6 +18,20 @@ class UserController extends Controller
         return view('user.index' , compact('user'));
     }
 
+    public function role()
+    {
+        $user = User::all();
+        return view('user.role' , compact('user'));
+    }
+
+    public function changeRole($id)
+    {
+        $user = User::findOrFail($id);
+        $user->roles()->detach();
+        $user->assignRole('admin');
+        return redirect()->route('role');
+    }
+
     public function delete($id)
     {
         $user = User::findOrFail($id);

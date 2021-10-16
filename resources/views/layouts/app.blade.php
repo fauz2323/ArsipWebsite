@@ -86,8 +86,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pengaturan:</h6>
                         <a class="collapse-item" href="{{ route('user') }}">User</a>
-                        <a class="collapse-item" href="#">Profile</a>
-                        <a class="collapse-item" href="#">Set Admin</a>
+                        <a class="collapse-item" href="{{ route('profile') }}">Profile</a>
+                        <a class="collapse-item" href="{{ route('role') }}">Set Admin</a>
                     </div>
                 </div>
             </li>
