@@ -18,7 +18,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Nomor Induk</label>
-                                <input type="text" class="form-control" name="nis" placeholder="Nomor Induk">
+                                <input type="text" class="form-control" name="nik" placeholder="Nomor Induk">
                             </div>
                             <div class="form-group increment">
                                 <label for="">file berkas</label>
