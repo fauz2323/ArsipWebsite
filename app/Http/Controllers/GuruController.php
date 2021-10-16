@@ -64,7 +64,7 @@ class GuruController extends Controller
 
             $path = Storage::disk('public')->putFile('filezMurid', $key);
             $files = [
-                'murid_id' => $murid->id,
+                'guru_id' => $murid->id,
                 'path' => $path,
             ];
             $murid->fileGuru()->create($files);
