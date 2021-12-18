@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -25,5 +28,15 @@ class HomeController extends Controller
     {
 
         return view('home');
+    }
+
+    public function changePass(Request $request)
+    {
+        $user = Auth::user();
+        $data = User::findOrFail($user->id);
+        $data->password = Hash::make($request->password);
+        $data->save();
+
+        return redirect()->route('home')->with(['success' => 'Password Berhasil Dirubah']);
     }
 }

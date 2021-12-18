@@ -65,14 +65,14 @@ class UserController extends Controller
     public function add(Request $request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'name' => $request->name1,
+            'email' => $request->email1,
+            'password' => Hash::make($request->password1)
 
         ]);
 
         $user->assignRole('staff');
 
-        return redirect()->route('admin-user');
+        return redirect()->route('user');
     }
 }
