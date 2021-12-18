@@ -60,6 +60,12 @@ class ArsipPostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'code_id' => 'required',
+            'nama' => 'required',
+            'keterangan' => 'required',
+            'file' => 'required',
+        ]);
 
         $arsip = ArsipPost::create([
             'code_id' => $request->code_id,
