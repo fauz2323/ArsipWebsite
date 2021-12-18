@@ -11,8 +11,11 @@
                         <h3>Alamat : {{ $data->alamat }}</h3>
                         <h3>NIK : {{ $data->NIK }}</h3>
                         @foreach ($data->fileGuru as $item)
-                            <h2>Data Arsip</h2>
-                            <img src="{{ asset('storage/' . $item->path) }}" class="img-fluid" alt="Gambar berkas">
+                            <div class="col">
+                                <h2>Data Guru {{ $loop->iteration }} :</h2>
+                                <a href="{{ asset('storage/' . $item->path) }}" class="btn btn-primary" download>Download
+                                    Data</a>
+                            </div>
                         @endforeach
                     </div>
                 </div>

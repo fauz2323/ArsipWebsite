@@ -11,8 +11,11 @@
                         <h3>Nama Arsip : {{ $data->nama_arsip }}</h3>
                         <h3>Keterangan Arsip : {{ $data->keterangan_arsip }}</h3>
                         @foreach ($data->files as $item)
-                            <h2>Data Arsip</h2>
-                            <img src="{{ asset('storage/' . $item->path) }}" class="img-fluid" alt="Gambar berkas">
+                            <div class="col">
+                                <h2>Data Arsip {{ $loop->iteration }} :</h2>
+                                <a href="{{ asset('storage/' . $item->path) }}" class="btn btn-primary" download>Download
+                                    Data</a>
+                            </div>
                         @endforeach
                     </div>
                 </div>

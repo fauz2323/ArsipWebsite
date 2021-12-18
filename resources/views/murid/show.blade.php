@@ -11,8 +11,13 @@
                         <h3>Alamat : {{ $data->alamat }}</h3>
                         <h3>NIS : {{ $data->NIS }}</h3>
                         @foreach ($data->filesMurid as $item)
-                            <h1>Data Arsip</h1>
-                            <img src="{{ asset('storage/' . $item->path) }}" class="img-fluid" alt="Gambar berkas">
+
+                            <div class="col">
+                                <h2>Data Murid {{ $loop->iteration }} :</h2>
+                                <a href="{{ asset('storage/' . $item->path) }}" class="btn btn-primary" download>Download
+                                    Data</a>
+                            </div>
+                            {{-- <img src="{{ asset('storage/' . $item->path) }}" class="img-fluid" alt="Gambar berkas"> --}}
                         @endforeach
                     </div>
                 </div>
