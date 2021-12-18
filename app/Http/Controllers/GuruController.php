@@ -54,6 +54,14 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nik' => 'required',
+            'file' => 'required'
+        ]);
+
         $murid = GuruModel::create([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
@@ -106,6 +114,14 @@ class GuruController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nik' => 'required',
+            'file' => 'required'
+        ]);
+
         $murid = GuruModel::findOrFail($id);
         if ($request->hasFile('file')) {
             foreach ($murid->fileGuru as $key) {

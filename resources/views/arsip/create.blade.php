@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -22,12 +23,15 @@
                                 <input type="text" class="form-control" name="nama" placeholder="nama berkas">
                             </div>
                             @error('nama')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">Error</div>
                             @enderror
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Keterangan Berkas</label>
                                 <input type="text" class="form-control" name="keterangan" placeholder="keterangan berkas">
                             </div>
+                            @error('keterangan')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group increment">
                                 <label for="">file berkas</label>
                                 <div class="input-group">

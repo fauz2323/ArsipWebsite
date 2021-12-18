@@ -19,7 +19,7 @@ class CodePostController extends Controller
     public function index()
     {
         $data = CodeArsip::all();
-        return view('kodearsip.index' , compact('data'));
+        return view('kodearsip.index', compact('data'));
     }
 
     /**
@@ -40,14 +40,17 @@ class CodePostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+
         $data = CodeArsip::insert([
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
         ]);
 
         return redirect()->route('kode.index');
-
-
     }
 
     /**
@@ -82,6 +85,11 @@ class CodePostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+
         $kodearsip = CodeArsip::findOrFail($id);
         $data = [
             'nama' => $request->nama,

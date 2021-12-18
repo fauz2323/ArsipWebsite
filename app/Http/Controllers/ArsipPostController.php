@@ -60,7 +60,7 @@ class ArsipPostController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'code_id' => 'required',
             'nama' => 'required',
             'keterangan' => 'required',
@@ -121,6 +121,13 @@ class ArsipPostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'code_id' => 'required',
+            'nama' => 'required',
+            'keterangan' => 'required',
+            'file' => 'required',
+        ]);
+
         $arsip = ArsipPost::findOrFail($id);
         if ($request->hasFile('file')) {
             foreach ($arsip->files as $key) {

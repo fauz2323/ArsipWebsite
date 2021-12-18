@@ -57,6 +57,12 @@ class MuridController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nis' => 'required',
+            'file' => 'required'
+        ]);
 
         $murid = Murid::create([
             'nama' => $request->nama,
@@ -111,6 +117,13 @@ class MuridController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nis' => 'required',
+            'file' => 'required'
+        ]);
+
         $murid = Murid::findOrFail($id);
         if ($request->hasFile('file')) {
             foreach ($murid->filesMurid as $key) {
