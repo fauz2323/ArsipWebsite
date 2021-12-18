@@ -126,7 +126,7 @@
 
             <ul class="metismenu" id="menu">
                 <li>
-                    <a href="#">
+                    <a href="{{ route('home') }}">
                         <div class="parent-icon"><i class="bi bi-telephone-fill"></i>
                         </div>
                         <div class="menu-title">Dashboard</div>

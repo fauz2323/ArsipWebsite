@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ArsipPost;
+use App\Models\GuruModel;
+use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = User::count();
+        $guru = GuruModel::count();
+        $arsip = ArsipPost::count();
+        $murid = Murid::count();
 
-        return view('home');
+        return view('home', compact('user', 'guru', 'arsip', 'murid'));
     }
 
     public function changePass(Request $request)
