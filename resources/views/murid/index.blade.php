@@ -18,6 +18,7 @@
                                 <th>Nama Murid</th>
                                 <th>NIS</th>
                                 <th>Alamat</th>
+                                <th>Uploader</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -52,9 +53,14 @@
                     {
                         data: 'NIS',
                         name: 'NIS'
-                    }, {
+                    },
+                    {
                         data: 'alamat',
                         name: 'alamat'
+                    },
+                    {
+                        data: 'user.name',
+                        name: 'user.name'
                     },
 
                     {

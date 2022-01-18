@@ -18,6 +18,7 @@
                                 <th>Nama Guru</th>
                                 <th>Nomor Induk</th>
                                 <th>Alamat</th>
+                                <th>Uploader</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
@@ -52,11 +53,15 @@
                     {
                         data: 'NIK',
                         name: 'NIK'
-                    }, {
+                    },
+                    {
                         data: 'alamat',
                         name: 'alamat'
                     },
-
+                    {
+                        data: 'user.name',
+                        name: 'user.name'
+                    },
                     {
                         data: 'action',
                         name: 'action',
