@@ -15,12 +15,15 @@ class CreateArsipPostsTable extends Migration
     {
         Schema::create('arsip_posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_akun');
             $table->unsignedBigInteger('code_id');
             $table->string('nama_arsip');
             $table->text('keterangan_arsip');
             $table->timestamps();
 
             $table->foreign('code_id')->references('id')->on('code_arsips')->onDelete('cascade');
+            $table->foreign('id_akun')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

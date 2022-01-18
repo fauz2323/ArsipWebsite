@@ -29,4 +29,14 @@ class ArsipPost extends Model
     {
         return $this->hasMany(File::class, 'arsip_id', 'id');
     }
+
+    /**
+     * Get the user that owns the ArsipPost
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class,'id_akun','id');
+    }
 }

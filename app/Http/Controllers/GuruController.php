@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Murid;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
@@ -23,7 +24,7 @@ class GuruController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = GuruModel::orderBy('nama')->get();
+            $data = GuruModel::orderBy('nama')->with('user')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -63,6 +64,7 @@ class GuruController extends Controller
         ]);
 
         $murid = GuruModel::create([
+            'id_akun'=>Auth::user()->id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'NIK' => $request->nik,
@@ -140,6 +142,7 @@ class GuruController extends Controller
             }
         }
         $data = [
+            'id_akun'=>Auth::user()->id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'NIK' => $request->nik,

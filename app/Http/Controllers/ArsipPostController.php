@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\ArsipPost;
 use App\Models\CodeArsip;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class ArsipPostController extends Controller
 {
@@ -23,7 +24,7 @@ class ArsipPostController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = ArsipPost::with('codeArsip')->get();
+            $data = ArsipPost::with('codeArsip','user')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -68,6 +69,7 @@ class ArsipPostController extends Controller
         ]);
 
         $arsip = ArsipPost::create([
+            'id_akun'=> Auth::user()->id,
             'code_id' => $request->code_id,
             'nama_arsip' => $request->nama,
             'keterangan_arsip' => $request->keterangan,
@@ -146,6 +148,7 @@ class ArsipPostController extends Controller
             }
         }
         $data = [
+            'id_akun'=>Auth::user()->id,
             'code_id' => $request->code_id,
             'nama_arsip' => $request->nama,
             'keterangan_arsip' => $request->keterangan,

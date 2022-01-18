@@ -18,4 +18,14 @@ class Murid extends Model
     {
         return $this->hasMany(FileMurid::class, 'murid_id', 'id');
     }
+
+    /**
+     * Get the user that owns the Murid
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class,'id_akun','id');
+    }
 }

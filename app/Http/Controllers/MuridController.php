@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Murid;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class MuridController extends Controller
 {
@@ -23,7 +24,7 @@ class MuridController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Murid::orderBy('nama')->get();
+            $data = Murid::orderBy('nama')->with('user')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -65,6 +66,7 @@ class MuridController extends Controller
         ]);
 
         $murid = Murid::create([
+            'id_akun'=>Auth::user()->id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nis' => $request->nis,
@@ -142,6 +144,7 @@ class MuridController extends Controller
             }
         }
         $data = [
+            'id_akun'=>Auth::user()->id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nis' => $request->nis,

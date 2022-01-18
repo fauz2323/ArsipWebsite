@@ -41,4 +41,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get all of the fileGuru for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function guru()
+    {
+        return $this->hasMany(GuruModel::class,'id_akun','id');
+    }
+
+    /**
+     * Get all of the ArsipPost for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function arsip()
+    {
+        return $this->hasMany(ArsipPost::class,'id_akun','id');
+    }
+
+    /**
+     * Get all of the murid for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function murid()
+    {
+        return $this->hasMany(Murid::class,'id_akun','id');
+    }
 }
