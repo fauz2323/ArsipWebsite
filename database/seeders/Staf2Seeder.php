@@ -16,8 +16,8 @@ class Staf2Seeder extends Seeder
     public function run()
     {
         $userStaff = User::create([
-            'name' => 'staff',
-            'email' => 'staff@staff.com',
+            'name' => 'staff2',
+            'email' => 'staff2@staff.com',
             'password' => Hash::make('staff'),
         ]);
 
