@@ -73,7 +73,6 @@ class ArsipPostController extends Controller
             'code_id' => $request->code_id,
             'nama_arsip' => $request->nama,
             'keterangan_arsip' => $request->keterangan,
-            'jenis_data' => 'jpg',
         ]);
 
         foreach ($request->file('file') as $key) {
