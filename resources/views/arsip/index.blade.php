@@ -16,7 +16,7 @@
                             <tr>
                                 <th width="30px">number</th>
                                 <th>Nama Arsip</th>
-                                <th>Jenis Data</th>
+                                <th>Uploader</th>
                                 <th>Keterangan</th>
                                 <th>aksi</th>
                             </tr>
@@ -50,8 +50,8 @@
                         name: 'nama_arsip'
                     },
                     {
-                        data: 'jenis_data',
-                        name: 'jenis_data'
+                        data: 'user.name',
+                        name: 'user.name'
                     }, {
                         data: 'keterangan_arsip',
                         name: 'keterangan_arsip'
