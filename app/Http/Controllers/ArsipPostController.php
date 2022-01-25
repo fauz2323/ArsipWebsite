@@ -71,7 +71,7 @@ class ArsipPostController extends Controller
             'code_id' => 'required',
             'nama' => 'required',
             'keterangan' => 'required',
-            'file' => 'required',
+            'file' => ['required'],
         ]);
 
         $arsip = ArsipPost::create([
@@ -132,7 +132,8 @@ class ArsipPostController extends Controller
             'code_id' => 'required',
             'nama' => 'required',
             'keterangan' => 'required',
-            'file' => 'required',
+            'file' => ['required', 'mimes:jpg,bmp,png,jpeg'],
+
         ]);
 
         $arsip = ArsipPost::findOrFail($id);
