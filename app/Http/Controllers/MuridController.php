@@ -24,7 +24,7 @@ class MuridController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Murid::orderBy('nama')->with('user')->where('id_akun',Auth::user()->id)->get();
+            $data = Murid::orderBy('nama')->with('user')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
