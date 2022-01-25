@@ -15,6 +15,7 @@
                         <thead>
                             <tr>
                                 <th width="30px">number</th>
+                                <th>Kode Arsip</th>
                                 <th>Nama Arsip</th>
                                 <th>Uploader</th>
                                 <th>Keterangan</th>
@@ -44,6 +45,10 @@
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
+                    },
+                    {
+                        data: 'code_arsip.nama',
+                        name: 'code_arsip.nama'
                     },
                     {
                         data: 'nama_arsip',
