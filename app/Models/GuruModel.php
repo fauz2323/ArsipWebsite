@@ -22,6 +22,11 @@ class GuruModel extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class,'id_akun','id');
+        return $this->belongsTo(User::class, 'id_akun', 'id');
+    }
+
+    public function codeArsip()
+    {
+        return $this->belongsTo(CodeArsip::class, 'code_id', 'id');
     }
 }

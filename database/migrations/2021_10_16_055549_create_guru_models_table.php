@@ -15,14 +15,16 @@ class CreateGuruModelsTable extends Migration
     {
         Schema::create('guru_models', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('code_id');
             $table->unsignedBigInteger('id_akun');
             $table->string('nama');
             $table->string('alamat');
+            $table->text('keterangan');
             $table->string('NIK');
             $table->timestamps();
 
+            $table->foreign('code_id')->references('id')->on('code_arsips')->onDelete('cascade');
             $table->foreign('id_akun')->references('id')->on('users')->onDelete('cascade');
-
         });
     }
 

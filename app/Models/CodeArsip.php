@@ -19,5 +19,12 @@ class CodeArsip extends Model
     {
         return $this->hasMany(ArsipPost::class, 'code_id', 'id');
     }
-
+    public function arsipMurid()
+    {
+        return $this->hasMany(GuruModel::class, 'code_id', 'id');
+    }
+    public function arsipGuru()
+    {
+        return $this->hasMany(Murid::class, 'code_id', 'id');
+    }
 }

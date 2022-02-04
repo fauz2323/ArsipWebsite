@@ -64,10 +64,12 @@ class GuruController extends Controller
         ]);
 
         $murid = GuruModel::create([
-            'id_akun'=>Auth::user()->id,
+            'id_akun' => Auth::user()->id,
             'nama' => $request->nama,
+            'code' => $request->code,
             'alamat' => $request->alamat,
             'NIK' => $request->nik,
+            'keterangan' => $request->keterangan ?? '-',
         ]);
 
         foreach ($request->file('file') as $key) {
@@ -142,10 +144,12 @@ class GuruController extends Controller
             }
         }
         $data = [
-            'id_akun'=>Auth::user()->id,
+            'id_akun' => Auth::user()->id,
             'nama' => $request->nama,
+            'code' => $request->code,
             'alamat' => $request->alamat,
             'NIK' => $request->nik,
+            'keterangan' => $request->keterangan ?? '-',
         ];
         $murid->update($data);
         return redirect()->route('guru.index');

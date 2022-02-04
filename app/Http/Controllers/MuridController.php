@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CodeArsip;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -47,7 +48,9 @@ class MuridController extends Controller
      */
     public function create()
     {
-        return view('murid.create');
+        $code = CodeArsip::all();
+
+        return view('murid.create', compact('code'));
     }
 
     /**
@@ -66,10 +69,12 @@ class MuridController extends Controller
         ]);
 
         $murid = Murid::create([
-            'id_akun'=>Auth::user()->id,
+            'id_akun' => Auth::user()->id,
+            'code_id' => $request->code,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nis' => $request->nis,
+            'keterangan' => $request->keterangan ?? '-',
         ]);
 
         foreach ($request->file('file') as $key) {
@@ -107,7 +112,9 @@ class MuridController extends Controller
     public function edit($id)
     {
         $data = Murid::findOrFail($id);
-        return view('murid.edit', compact('data'));
+        $code = CodeArsip::all();
+
+        return view('murid.edit', compact('data', 'code'));
     }
 
     /**
@@ -144,10 +151,12 @@ class MuridController extends Controller
             }
         }
         $data = [
-            'id_akun'=>Auth::user()->id,
+            'id_akun' => Auth::user()->id,
+            'code_id' => $request->code,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nis' => $request->nis,
+            'keterangan' => $request->keterangan ?? '-',
         ];
         $murid->update($data);
         return redirect()->route('murid.index');

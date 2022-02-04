@@ -24,6 +24,11 @@
                                 <input type="text" class="form-control" name="nik" placeholder="Nomor Induk"
                                     value="{{ $data->NIK }}">
                             </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="keterangan"
+                                    rows="3">{{ $data->keterangan }}</textarea>
+                            </div>
                             <div class="form-group increment">
                                 <label for="">file berkas</label>
                                 <div class="input-group">
