@@ -63,6 +63,13 @@ Route::post('post-master-guru',[MasterController::class,'storeMasterGuru'])->nam
 Route::get('addFileMurid/{id}',[MasterController::class,'addFileMurid'])->name('addFileMurid');
 Route::get('addFileGuru/{id}',[MasterController::class,'addFileGuru'])->name('addFileGuru');
 
+//edit master
+Route::get('edit/{id}/MasterGuru',[MasterController::class,'editmasterGuru'])->name('editmasterGuru');
+Route::get('edit/{id}/MasterMurid',[MasterController::class,'editmasterMurid'])->name('editmasterMurid');
+
+Route::post('post/{id}/masterGuru',[MasterController::class,'updateGuru'])->name('updateGuru');
+Route::post('post/{id}/masterMurid',[MasterController::class,'updateMurid'])->name('updateMurid');
+
 
 
 

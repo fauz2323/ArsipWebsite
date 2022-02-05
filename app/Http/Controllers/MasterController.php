@@ -23,7 +23,7 @@ class MasterController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="/addFileGuru/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Add Berkas</a> <a href="/Edit/' . $row->id . ' /MasterGuru" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editCustomer">Edit</a>';
+                    $btn = '<a href="/addFileGuru/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Add Berkas</a> <a href="/edit/' . $row->id . ' /MasterGuru" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editCustomer">Edit</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -39,7 +39,7 @@ class MasterController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="/addFileMurid/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Add Berkas</a> <a href="/Edit/' . $row->id . ' /MasterMurid" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editCustomer">Edit</a>';
+                    $btn = '<a href="/addFileMurid/' . $row->id . '" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-danger btn-sm editCustomer">Add Berkas</a> <a href="/edit/' . $row->id . '/MasterMurid" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editCustomer">Edit</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -118,13 +118,13 @@ class MasterController extends Controller
     public function editmasterGuru($id)
     {
         $data = MasterGuru::find($id);
-        return view('master.creategurumaster','data');
+        return view('master.editGuruMaster',compact('data'));
     }
 
     public function editmasterMurid($id)
     {
         $data = MasterMurid::find($id);
-        return view('master.','data');
+        return view('master.editMuridMaster',compact('data'));
     }
 
     //store data
@@ -133,23 +133,23 @@ class MasterController extends Controller
     {
         $data = MasterGuru::find($id);
         $data->update([
-            'nama'=>$request->name,
+            'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'NIK'=>$request->nik,
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('indexMasterGuru');
     }
 
     public function updateMurid(Request $request,$id)
     {
         $data = MasterMurid::find($id);
         $data->update([
-            'nama'=>$request->name,
+            'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'NIS'=>$request->nis,
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('indexMasterMurid');
     }
 }

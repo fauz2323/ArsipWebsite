@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <form action="{{ route('guru.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('updateGuru',$data->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="m-4">
                             <div class="mb-4">
@@ -51,3 +51,4 @@
             </div>
         </div>
     </div>
+@endsection
