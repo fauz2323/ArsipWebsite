@@ -15,7 +15,15 @@ class CreateMasterMuridsTable extends Migration
     {
         Schema::create('master_murids', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_akun');
+
+            $table->string('nama');
+            $table->string('alamat');
+            $table->string('NIS');
             $table->timestamps();
+
+            $table->foreign('id_akun')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

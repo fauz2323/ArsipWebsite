@@ -5,6 +5,7 @@ use App\Http\Controllers\CodePostController;
 use App\Http\Controllers\ArsipPostController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
@@ -46,6 +47,23 @@ Route::get('guruDelete/{id}', [GuruController::class, 'destroy']);
 Route::get('profile', [SettingController::class, 'profile'])->name('profile');
 
 Route::post('change-pass', [HomeController::class, 'changePass'])->name('changepass');
+
+
+//master data
+Route::get('Master-data-guru',[MasterController::class,'indexMasterGuru'])->name('indexMasterGuru');
+Route::get('Master-data-murid',[MasterController::class,'indexMasterMurid'])->name('indexMasterMurid');
+
+//create data master
+Route::get('create-master-guru',[MasterController::class,'masterGuru'])->name('masterGuru');
+Route::get('create-master-murid',[MasterController::class,'masterMurid'])->name('masterMurid');
+
+Route::post('post-master-murid',[MasterController::class,'storeMasterMurid'])->name('storeMasterMurid');
+Route::post('post-master-guru',[MasterController::class,'storeMasterGuru'])->name('storeMasterGuru');
+
+Route::get('addFileMurid/{id}',[MasterController::class,'addFileMurid'])->name('addFileMurid');
+Route::get('addFileGuru/{id}',[MasterController::class,'addFileGuru'])->name('addFileGuru');
+
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

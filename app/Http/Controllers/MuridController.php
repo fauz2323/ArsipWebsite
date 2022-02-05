@@ -25,7 +25,7 @@ class MuridController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Murid::orderBy('nama')->with('user')->get();
+            $data = Murid::orderBy('nama')->with('user','codeArsip')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -70,7 +70,7 @@ class MuridController extends Controller
 
         $murid = Murid::create([
             'id_akun' => Auth::user()->id,
-            'code_id' => $request->code,
+            'code_id' => $request->code_id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nis' => $request->nis,
@@ -152,7 +152,7 @@ class MuridController extends Controller
         }
         $data = [
             'id_akun' => Auth::user()->id,
-            'code_id' => $request->code,
+            'code_id' => $request->code_id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nis' => $request->nis,

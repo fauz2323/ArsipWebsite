@@ -4,19 +4,20 @@
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"> Data Berkas Guru</h6>
+                <h6 class="m-0 font-weight-bold text-primary"> Data Berkas Murid</h6>
             </div>
             <div class="card-body">
-
+                <div class="">
+                    <a href="{{ route('masterMurid') }}" class="btn btn-primary mb-3">Add data</a>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="users-table" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th width="30px">number</th>
-                                <th>Code Berkas</th>
-                                <th>Nama Guru</th>
+                                <th>Nama Murid</th>
                                 <th>Nomor Induk</th>
-                                <th>Keterangan</th>
+                                <th>Alamat</th>
                                 <th>Uploader</th>
                                 <th>aksi</th>
                             </tr>
@@ -46,20 +47,16 @@
                         }
                     },
                     {
-                        data: 'code_arsip.nama',
-                        name: 'code_arsip.nama'
-                    },
-                    {
                         data: 'nama',
                         name: 'nama'
                     },
                     {
-                        data: 'NIK',
-                        name: 'NIK'
+                        data: 'NIS',
+                        name: 'NIS'
                     },
                     {
-                        data: 'keterangan',
-                        name: 'keterangan'
+                        data: 'alamat',
+                        name: 'alamat'
                     },
                     {
                         data: 'user.name',

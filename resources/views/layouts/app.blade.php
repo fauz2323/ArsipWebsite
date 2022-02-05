@@ -136,6 +136,20 @@
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-grid-fill"></i>
                         </div>
+                        <div class="menu-title">Data Master</div>
+                    </a>
+                    <ul>
+                        <li> <a href="{{ route('indexMasterMurid') }}"><i class="bi bi-circle"></i>Master Murid</a>
+                        </li>
+                        <li> <a href="{{ route('indexMasterGuru') }}"><i class="bi bi-circle"></i>Master Guru</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class="bi bi-grid-fill"></i>
+                        </div>
                         <div class="menu-title">Data Arsip</div>
                     </a>
                     <ul>

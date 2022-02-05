@@ -71,4 +71,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Murid::class,'id_akun','id');
     }
+
+    public function masterMurid()
+    {
+        return $this->hasMany(masterMurid::class,'id_akun','id');
+    }
+
+    public function masterGuru()
+    {
+        return $this->hasMany(masterGuru::class,'id_akun','id');
+    }
 }

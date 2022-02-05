@@ -15,7 +15,15 @@ class CreateMasterGurusTable extends Migration
     {
         Schema::create('master_gurus', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_akun');
+
+            $table->string('nama');
+            $table->string('alamat');
+            $table->string('NIK');
             $table->timestamps();
+
+            $table->foreign('id_akun')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

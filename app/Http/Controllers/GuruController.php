@@ -24,7 +24,7 @@ class GuruController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = GuruModel::orderBy('nama')->with('user')->get();
+            $data = GuruModel::orderBy('nama')->with('user','codeArsip')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -66,7 +66,7 @@ class GuruController extends Controller
         $murid = GuruModel::create([
             'id_akun' => Auth::user()->id,
             'nama' => $request->nama,
-            'code' => $request->code,
+            'code_id' => $request->code_id,
             'alamat' => $request->alamat,
             'NIK' => $request->nik,
             'keterangan' => $request->keterangan ?? '-',
@@ -146,7 +146,7 @@ class GuruController extends Controller
         $data = [
             'id_akun' => Auth::user()->id,
             'nama' => $request->nama,
-            'code' => $request->code,
+            'code_id' => $request->code_id,
             'alamat' => $request->alamat,
             'NIK' => $request->nik,
             'keterangan' => $request->keterangan ?? '-',

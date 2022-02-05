@@ -19,15 +19,15 @@
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Nama Murid</label>
-                                <input type="text" class="form-control" name="nama" placeholder="nama Murid">
+                                <input type="text" class="form-control" name="nama" value="{{ $data->nama }}" placeholder="nama Murid">
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Alamat</label>
-                                <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                                <input type="text" class="form-control" name="alamat" value="{{ $data->alamat }}" placeholder="Alamat">
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">NIS</label>
-                                <input type="text" class="form-control" name="nis" placeholder="Alamat">
+                                <input type="text" class="form-control" name="nis" value="{{ $data->NIS }}" placeholder="Alamat">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>

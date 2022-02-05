@@ -9,8 +9,17 @@
                         @csrf
                         <div class="m-4">
                             <div class="mb-4">
+                                <label for="exampleFormControlInput1" class="form-label">Kode Arsip</label>
+                                <select class="form-control" name="code_id" aria-label="Default select example">
+                                    <option selected disabled>Pilih Kode Arsip</option>
+                                    @foreach ($code as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Nama Guru</label>
-                                <input type="text" class="form-control" name="nama" placeholder="nama Guru">
+                                <input type="text" class="form-control" value="{{ $data->nama }}" name="nama" placeholder="nama Guru">
                                 @error('nama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -19,7 +28,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Alamat</label>
-                                <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                                <input type="text" class="form-control" value="{{ $data->alamat }}" name="alamat" placeholder="Alamat">
                                 @error('alamat')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +37,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="exampleFormControlInput1" class="form-label">Nomor Induk</label>
-                                <input type="text" class="form-control" name="nik" placeholder="Nomor Induk">
+                                <input type="text" class="form-control" value="{{ $data->NIK }}" name="nik" placeholder="Nomor Induk">
                                 @error('nik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
